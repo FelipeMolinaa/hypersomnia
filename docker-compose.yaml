@@ -1,12 +1,48 @@
 version: '3'
 services:
-  couchserver:
+  hypersomnia-frontend:
+    image: hypersomnia-frontend:alpha-0.1
+    restart: always
+    build:
+      context: ./src/frontend
+    networks: 
+      - hypersomnia-network
+    depends_on:
+      - hypersomnia-couchdb
+    expose: 
+      - 80
+    
+  hypersomnia-couchdb:
     image: couchdb
     restart: always
-    ports:
-      - "5984:5984"
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=admin
     volumes:
-        - ./volumes/couchdb/data:/opt/couchdb/data
+      - ./volumes/couchdb/data:/opt/couchdb/data
+      - ./volumes/couchdb/etc:/opt/couchdb/etc/local.d
+    networks: 
+      - hypersomnia-network
+    expose:
+      - 80
+
+  hypersomnia-nginx:
+    image: nginx
+    restart: always
+    depends_on:
+      - hypersomnia-couchdb
+      - hypersomnia-frontend
+    volumes:
+      - ./volumes/nginx/:/etc/nginx/conf.d
+    networks: 
+      - hypersomnia-network
+    ports:
+      - 8082:80
+    expose:
+      - 80
+
+networks:
+  hypersomnia-network:
+    external: true
+    name: hypersomnia-network
+    
