@@ -24,8 +24,15 @@
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "sass",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": ["src/styles.sass"],
-                        "scripts": []
+                        "styles": [
+                            "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "@angular/material/prebuilt-themes/indigo-pink.css",
+                            "src/styles.sass"
+                        ],
+                        "scripts": [
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -79,8 +86,14 @@
                         "tsConfig": "tsconfig.spec.json",
                         "inlineStyleLanguage": "sass",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": ["src/styles.sass"],
-                        "scripts": []
+                        "styles": [
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "@angular/material/prebuilt-themes/indigo-pink.css",
+                            "src/styles.sass"
+                        ],
+                        "scripts": [
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ]
                     }
                 },
                 "lint": {
